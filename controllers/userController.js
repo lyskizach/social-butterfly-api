@@ -31,9 +31,9 @@ module.exports = {
     async updateUser(req, res) {
         try {
             const user = await User.findOneAndUpdate(
-                { first: req.params.first },
-                { $pull: { first: req.params.first } },
-                { new: true }
+                { _id: req.params.id },
+                { $addToSet: { assignments: req.body } },
+                { runValidators: true, new: true }
             )
         } catch (err) {
             console.log(err);
