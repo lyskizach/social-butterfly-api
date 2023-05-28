@@ -1,5 +1,4 @@
-const { default: mongoose } = require('mongoose');
-const { Schema, model } = require(mongoose);
+const { Schema, model } = require('mongoose');
 const { Thought } = require('./Thought');
 
 const userSchema = new Schema(
