@@ -117,19 +117,21 @@ const generateUsers = (count) => {
       const fullName = getRandomName();
       const first = fullName.split(' ')[0];
       const last = fullName.split(' ')[1];
-      users.push({ first, last });
+      const id = i + 1;
+      const thoughts = generateThoughts(3, id);
+      users.push({ id, first, last, thoughts });
     }
     return users;
   };
 
 // Function to generate thoughts in DB
-const generateThoughts = (users, count) => {
+const generateThoughts = (count, id) => {
     const thoughts = [];
     for (let i = 0; i < count; i++) {
-      const user = getRandomArrItem(users);
+    //   const user = getRandomArrItem(users);
       thoughts.push({
         content: getRandomArrItem(thoughtContent),
-        createdBy: user._id,
+        createdBy: id,
       });
     }
     return thoughts;
@@ -147,10 +149,10 @@ connection.once('open', async () => {
     const thoughts = [];
 
     for (let i = 0; i < users.length; i++) {
-        const user = users[i]
-        const userThoughts = generateThoughts([user], 3);
+        const user = getRandomArrItem(users).id;
+        const userThoughts = generateThoughts(1, user);
         thoughts.push(...userThoughts);
-  }
+    }
 
     await User.collection.insertMany(users);
     console.table(users);
