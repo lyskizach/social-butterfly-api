@@ -148,7 +148,7 @@ connection.once('open', async () => {
     const users = generateUsers(20);
     const thoughts = [];
 
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i < 40; i++) {
         const user = getRandomArrItem(users).id;
         const userThoughts = generateThoughts(1, user);
         thoughts.push(...userThoughts);
