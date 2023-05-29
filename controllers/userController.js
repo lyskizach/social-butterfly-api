@@ -13,8 +13,9 @@ module.exports = {
     async getSingleUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.id });
-            const id = req.params.id;
-            console.log(id);
+            if(!user) {
+                res.status(400).json(`No user found with that ID`);
+            };
             res.json(user);
         } catch (err) {
             console.log(err);
@@ -34,9 +35,10 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.id },
-                { $addToSet: { assignments: req.body } },
+                { $set: req.body } ,
                 { runValidators: true, new: true }
             )
+            res.json(user);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
@@ -44,8 +46,10 @@ module.exports = {
     },
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete({ _id: req.params.id });
-            res.json(user);
+            const username = await User.findOne({ _id: req.params.id });
+            const name = username.first + ' ' + username.last;
+            await User.findOneAndDelete({ _id: req.params.id });
+            res.json(`Deleted ${name}`);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);

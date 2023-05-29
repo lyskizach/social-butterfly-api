@@ -117,8 +117,10 @@ const generateUsers = (count) => {
       const fullName = getRandomName();
       const first = fullName.split(' ')[0];
       const last = fullName.split(' ')[1];
-    //   const id = i + 1;
       const thoughts = generateThoughts(3);
+    //   const friend = fullName;
+    //   const friends = [];
+    //   friends.push(friend);
       users.push({ first, last, thoughts });
     }
     return users;
@@ -128,10 +130,8 @@ const generateUsers = (count) => {
 const generateThoughts = (count) => {
     const thoughts = [];
     for (let i = 0; i < count; i++) {
-    //   const user = getRandomArrItem(users);
       thoughts.push({
         content: getRandomArrItem(thoughtContent),
-        // createdBy: id,
       });
     }
     return thoughts;
@@ -146,6 +146,7 @@ connection.once('open', async () => {
     await Thought.deleteMany({});
 
     const users = generateUsers(20);
+    const friends = getRandomArrItem(users);
     const thoughts = [];
 
     for (let i = 0; i < 40; i++) {
@@ -153,12 +154,16 @@ connection.once('open', async () => {
         // console.log(user);
         const userThoughts = generateThoughts(1);
         thoughts.push(...userThoughts);
-    }
+    };
 
     await User.collection.insertMany(users);
     console.table(users);
     await Thought.collection.insertMany(thoughts);
     console.table(thoughts);
+
+    // createdUsers = await User.find();
+    // console.log(createdUsers);
+    // createdUsers.forEach()
 
     console.info('Seeding complete! 🌱');
     process.exit(0);
