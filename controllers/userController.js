@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
     async getUsers(req, res) {
@@ -13,6 +13,8 @@ module.exports = {
     async getSingleUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.id });
+            const id = req.params.id;
+            console.log(id);
             res.json(user);
         } catch (err) {
             console.log(err);

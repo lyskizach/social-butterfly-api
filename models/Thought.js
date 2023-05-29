@@ -1,5 +1,4 @@
-const { Schema, model } = require('mongoose');
-const User = require('./User');
+const { Schema, model, Types } = require('mongoose');
 
 const thoughtSchema = new Schema(
     {
@@ -7,12 +6,10 @@ const thoughtSchema = new Schema(
             type: Date,
             default: Date.now,
         },
-        createdBy: [
-            {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            }
-        ],
+        // thoughtId: {
+        //     type: Schema.Types.ObjectId,
+        //     default: () => new Types.ObjectId(),
+        // },
         content: {
             type: String,
             minLength: 15,
@@ -22,12 +19,12 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
-          },
-          id: false,
+            getters: true,
+        },
+        toObject: { virtuals: true },
     }
 );
 
 const Thought = model('Thought', thoughtSchema);
 
-// module.exports = thoughtSchema, Thought;
 module.exports = Thought;

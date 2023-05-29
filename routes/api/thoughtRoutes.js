@@ -10,8 +10,8 @@ const {
 // /api/thought
 router.route('/').get(getThoughts).post(createThought);
 
-// /api/thought/:thoughtID
-router.route('/:thoughtID')
+// /api/thought/id
+router.route('/:id')
   .get(getSingleThought)
   .put(updateThought)
   .delete(deleteThought);

@@ -10,8 +10,8 @@ const {
 // /api/user
 router.route('/').get(getUsers).post(createUser);
 
-// /api/user/:userID
-router.route('/:userID').get(getSingleUser).put(updateUser).delete(deleteUser);
+// /api/user/:id
+router.route('/:id').get(getSingleUser).put(updateUser).delete(deleteUser);
 
 // /api/user/:userID/friends
 // update friends list? 
