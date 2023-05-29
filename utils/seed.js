@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
-const { User, Thought } = require('../models');
+const { User, Thought, reactionSchema, friendListSchema } = require('../models');
 
 const firstNames = [
     'Wei',
@@ -103,6 +103,8 @@ const thoughtContent = [
     'Happiness is a choice, and I choose to be happy.'
 ];
 
+const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 // *** Taken from 18-NoSQL Mini-project, modified by myself ***
 // Get a random item given an array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -160,10 +162,6 @@ connection.once('open', async () => {
     console.table(users);
     await Thought.collection.insertMany(thoughts);
     console.table(thoughts);
-
-    // createdUsers = await User.find();
-    // console.log(createdUsers);
-    // createdUsers.forEach()
 
     console.info('Seeding complete! 🌱');
     process.exit(0);
