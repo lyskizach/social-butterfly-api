@@ -35,9 +35,9 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.id },
-                { $set: req.body } ,
+                { $set: req.body },
                 { runValidators: true, new: true }
-            )
+            );
             res.json(user);
         } catch (err) {
             console.log(err);
