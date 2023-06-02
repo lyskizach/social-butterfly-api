@@ -3,23 +3,27 @@ const friendListSchema = require('./FriendList');
 
 const userSchema = new Schema(
     {
-        first: {
+        username: {
             type: String,
             required: true,
             max_length: 50,
         },
-        last: {
+        email: {
             type: String,
             required: true,
-            max_length: 50,
         },
         thoughts: [
             {
-                type: Schema.Types.Object,
+                type: Schema.Types.ObjectId,
                 ref: 'Thought',
             },
         ],
-        friends: [friendListSchema],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
     },
     {
         toJSON: {

@@ -120,9 +120,6 @@ const generateUsers = (count) => {
       const first = fullName.split(' ')[0];
       const last = fullName.split(' ')[1];
       const thoughts = generateThoughts(3);
-    //   const friend = fullName;
-    //   const friends = [];
-    //   friends.push(friend);
       users.push({ first, last, thoughts });
     }
     return users;

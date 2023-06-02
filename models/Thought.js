@@ -7,14 +7,15 @@ const thoughtSchema = new Schema(
             type: Date,
             default: Date.now,
         },
-        // thoughtId: {
-        //     type: Schema.Types.ObjectId,
-        //     default: () => new Types.ObjectId(),
-        // },
-        content: {
+        thoughtText: {
             type: String,
-            minLength: 15,
-            maxLength: 500,
+            required: true,
+            minLength: 1,
+            maxLength: 280,
+        },
+        username: {
+            type: String,
+            required: true,
         },
         reactions: [reactionSchema],
     },
