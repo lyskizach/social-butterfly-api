@@ -22,6 +22,7 @@ router.route('/:id')
   .delete(deleteThought);
 
 // /api/thought/:id/reactions
+router.route('/:id/reactions').post().delete();
 // POST create new reaction stored in single thoughts reactions array
 // DELETE to remove a reaction by the reactions id value
 

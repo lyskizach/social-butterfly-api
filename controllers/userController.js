@@ -55,4 +55,28 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    async addFriend(req, res) {
+        try {
+            const userId = req.params.id;
+            // console.log(userId);
+            const friendId = req.params.friendId;
+            // console.log(friendId);
+            const user = await User.findOne({ _id: userId });
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+             // Check if the friendId is already in the user's friend list
+            const isFriend = user.friends.includes(friendId);
+            if (isFriend) {
+                // Friend already exists in the user's friend list
+                return res.status(400).json({ error: 'Friend already exists' });
+            }
+            user.friends.push(friendId);
+            await user.save();
+            res.status(200).json(user);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    },
 };
