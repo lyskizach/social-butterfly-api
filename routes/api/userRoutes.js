@@ -13,8 +13,8 @@ router.route('/').get(getUsers).post(createUser);
 // /api/user/:id
 router.route('/:id').get(getSingleUser).put(updateUser).delete(deleteUser);
 
-// /api/user/:userID/friends
-// update friends list? 
-// router.route('/:userID/friends')
+// /api/user/:id/friends/:id
+// POST to add new friend by id
+// DELETE to remove a friend from users list
 
 module.exports = router;
