@@ -10,7 +10,15 @@ const userSchema = new Schema(
         email: {
             type: String,
             required: true,
-        },
+            validate: {
+              validator: function(value) {
+                // Regular expression pattern to validate email format
+                const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+                return emailRegex.test(value);
+              },
+              message: 'Invalid email format',
+            },
+          },
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
