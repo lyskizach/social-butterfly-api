@@ -68,8 +68,8 @@ module.exports = {
     },
     async deleteReaction(req, res) {
         try {
-            const thoughtId = req.params.id; // Get the thought ID from request parameters
-            const reactionId = req.params.reactionId; // Get the reaction ID from request parameters
+            const thoughtId = req.params.id;
+            const reactionId = req.params.reactionId;
             const thought = await Thought.findById(thoughtId);
             if (!thought) {
                 return res.status(404).json({ error: 'Thought not found' });
