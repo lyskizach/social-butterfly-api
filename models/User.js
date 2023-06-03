@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const Thought = require('./Thought');
 
 const userSchema = new Schema(
     {
@@ -40,6 +41,16 @@ const userSchema = new Schema(
         toObject: { virtuals: true },
     }
 );
+
+userSchema.pre('remove', async function (next) {
+    try {
+      const user = this;
+      await Thought.deleteMany({ username: user.username });
+      next();
+    } catch (err) {
+      next(err);
+    }
+  });
 
 const User = model('User', userSchema);
 
