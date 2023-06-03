@@ -5,6 +5,8 @@ const {
   createThought,
   updateThought,
   deleteThought,
+  addReaction,
+  deleteReaction,
 } = require('../../controllers/thoughtController.js');
 
 // /api/thought
@@ -22,7 +24,8 @@ router.route('/:id')
   .delete(deleteThought);
 
 // /api/thought/:id/reactions
-router.route('/:id/reactions').post().delete();
+router.route('/:id/reactions').post(addReaction);
+router.route('/:id/reactions/:reactionId').delete(deleteReaction);
 // POST create new reaction stored in single thoughts reactions array
 // DELETE to remove a reaction by the reactions id value
 
