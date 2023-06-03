@@ -42,7 +42,7 @@ const userSchema = new Schema(
     }
 );
 
-userSchema.pre('remove', async function (next) {
+userSchema.pre('findOneAndDelete', async function (next) {
     try {
       const user = this;
       await Thought.deleteMany({ username: user.username });

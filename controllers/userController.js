@@ -46,9 +46,11 @@ module.exports = {
     },
     async deleteUser(req, res) {
         try {
-            const user = await User.findOne({ _id: req.params.id });
-            const name = user.first + ' ' + user.last;
-            await user.remove();
+            const user = await User.findOneAndDelete({ _id: req.params.id });
+            if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+            }
+            const name = user.username;
             res.json(`Deleted ${name}`);
         } catch (err) {
             console.log(err);
